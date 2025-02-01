@@ -1,0 +1,1030 @@
+{
+	"info": {
+		"_postman_id": "20236e80-60ba-494d-98a0-57a4523e1191",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "587758"
+	},
+	"item": [
+		{
+			"name": "Devices",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Example\",\n    \"brand\": \"Test\",\n    \"state\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}/devices",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Example\",\n    \"brand\": \"Test\",\n    \"state\": \"available\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "23b89246-acf3-4803-b14a-7261f7937358"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:42:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "170"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"92cb0319-fdb7-4ab8-b8cb-780e93f2c962\",\n        \"name\": \"Example\",\n        \"brand\": \"Test\",\n        \"state\": \"available\",\n        \"creationTime\": \"2025-02-01T18:42:28.73861-03:00\"\n    }\n}"
+						},
+						{
+							"name": "Invalid State",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Example\",\n    \"brand\": \"Test\",\n    \"state\": \"INVALID_STATE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "ada5f61b-a76b-46e8-aefd-bd2c50b4e828"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:42:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "111"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"invalid state, value must be one of the following: 'active', 'inactive' or 'in-use'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated\",\n    \"brand\": \"Updated\",\n    \"state\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices",
+								"{{DEVICE_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated\",\n    \"brand\": \"Updated\",\n    \"state\": \"available\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "19a67edc-ab66-435d-86ee-e54c942625be"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:46:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"invalid id - must be a valid uuid\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated\",\n    \"brand\": \"Updated\",\n    \"state\": \"available\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "f4164e17-60a6-41cf-81c1-27ec350eb7c8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:47:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "162"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"92cb0319-fdb7-4ab8-b8cb-780e93f2c962\",\n        \"name\": \"Example\",\n        \"brand\": \"Test\",\n        \"state\": \"in-use\",\n        \"creationTime\": \"2025-02-01T21:42:28.73861Z\"\n    }\n}"
+						},
+						{
+							"name": "In Use - Update Name",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "00ca97e4-ed18-4ea6-9e80-0ae739ea35e7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:48:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"cannot change name while in use\"\n}"
+						},
+						{
+							"name": "In Use - Update Brand",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"brand\": \"Updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "5a8c9c15-c541-4326-87a4-cf11d68a24e5"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:49:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"cannot change brand while in use\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated\",\n    \"brand\": \"Updated\",\n    \"state\": \"available\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "7dffe125-cb5f-4c88-9e77-9434773c4250"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:57:20 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"device not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices",
+								"{{DEVICE_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "In Use",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "88596b35-9232-4c72-9a2a-05a6d17382ff"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:50:51 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"cannot delete device in use\"\n}"
+						},
+						{
+							"name": "Invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "c90c8a5f-e0a1-4eb3-bde4-612e500f4a0a"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:51:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"invalid id - must be a valid uuid\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "f4e6ccb1-b54d-4393-ab69-9c0588762450"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:52:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": null\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "5f4c0413-754e-4436-bc71-ed5aba965709"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:55:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"device not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/devices",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "3f45835d-e5e2-44f2-aa54-6df28243304f"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:58:09 GMT"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"39735372-23aa-4e87-84c4-a41cbbd24b54\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:25:06.77836Z\"\n        },\n        {\n            \"id\": \"f0fbd309-dd53-43b1-be8b-5a2d12158a6f\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:25:06.846913Z\"\n        },\n        {\n            \"id\": \"84a79b14-f074-4778-810f-a641c76803b4\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:25:07.338255Z\"\n        },\n        {\n            \"id\": \"4e3b080b-8e62-430c-8930-3d05b5ad4ef8\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:25:07.347627Z\"\n        },\n        {\n            \"id\": \"bb734101-f624-4d6b-bcf7-59c5d268d2f8\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:25:07.357664Z\"\n        },\n        {\n            \"id\": \"077e4094-f53d-4984-b3ec-dec077e08858\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:25:07.367328Z\"\n        },\n        {\n            \"id\": \"b7ed78da-8788-429c-8efc-72984983b134\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:30:09.616142Z\"\n        },\n        {\n            \"id\": \"8e8d9553-553f-47b3-b79f-2fa49bff43d1\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:30:09.658846Z\"\n        },\n        {\n            \"id\": \"8106a4d8-4957-472a-a94f-c85bbb30af5e\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:30:10.061066Z\"\n        },\n        {\n            \"id\": \"586f6608-7340-463b-a6ad-e3557074440d\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:30:10.071912Z\"\n        },\n        {\n            \"id\": \"80c82668-386c-499b-bf3a-db4525d95c70\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:30:10.079759Z\"\n        },\n        {\n            \"id\": \"a543fad0-d8ec-4782-9cad-3fb6d7ab3f8d\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:30:10.087866Z\"\n        },\n        {\n            \"id\": \"6d62f94a-3bac-4d15-a702-0cb1848417e1\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:34:12.998198Z\"\n        },\n        {\n            \"id\": \"85d459b2-6f0a-4263-93fe-7f45c7180389\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:34:13.06964Z\"\n        },\n        {\n            \"id\": \"5314b3e5-0d45-4620-b799-c8a96519f4c3\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:34:13.808366Z\"\n        },\n        {\n            \"id\": \"41c7a761-74a2-448e-b21a-e64f1a585035\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:34:13.815262Z\"\n        },\n        {\n            \"id\": \"648e33f5-0c9c-4142-8623-320ddd28889b\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"in-use\",\n            \"creationTime\": \"2025-02-01T21:34:13.82438Z\"\n        },\n        {\n            \"id\": \"3c58df9d-2fdc-45e6-8f17-373419f19881\",\n            \"name\": \"mock_name\",\n            \"brand\": \"mock_test\",\n            \"state\": \"inactive\",\n            \"creationTime\": \"2025-02-01T21:34:13.832305Z\"\n        },\n        {\n            \"id\": \"252df896-987e-4657-acb7-8b9cb9f57122\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:54.966977Z\"\n        },\n        {\n            \"id\": \"58be3dda-b416-406a-b7ea-0d7af74df769\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:57.075878Z\"\n        },\n        {\n            \"id\": \"79a3fddc-b91a-4838-8838-9c9a8be2b1e5\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:58.090372Z\"\n        },\n        {\n            \"id\": \"abcb8bdb-ad0d-4772-8657-80075806c515\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:58.980639Z\"\n        },\n        {\n            \"id\": \"7c596ede-0522-4463-8377-2697f5e59361\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:00.196922Z\"\n        },\n        {\n            \"id\": \"605a2370-5f4a-4be6-9ac4-02e1f8aadb8f\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:03.849865Z\"\n        },\n        {\n            \"id\": \"067eea9a-735b-4f50-a5de-dd1646ed91a1\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:04.759059Z\"\n        },\n        {\n            \"id\": \"36791afb-1227-4108-a9db-3acd7e8ced9f\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:05.646927Z\"\n        },\n        {\n            \"id\": \"296cdf0a-3934-4422-88c2-ca66d848e8c0\",\n            \"name\": \"Example\",\n            \"brand\": \"brand c\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:07.541096Z\"\n        },\n        {\n            \"id\": \"2d48f52c-44e4-4ac9-89d4-c8fb8572a527\",\n            \"name\": \"Example\",\n            \"brand\": \"brand c\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:08.438382Z\"\n        },\n        {\n            \"id\": \"fa61097d-f9ae-4a43-8b87-1161cb0fb20d\",\n            \"name\": \"Example\",\n            \"brand\": \"brand e\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:12.159465Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices",
+								"{{DEVICE_ID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "497126d1-7281-4186-b0ad-0be0bed0082b"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:57:44 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"Device not found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/{{DEVICE_ID}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"{{DEVICE_ID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "d6342608-9096-4589-a89b-02f435af31ec"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:58:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "166"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"39735372-23aa-4e87-84c4-a41cbbd24b54\",\n        \"name\": \"test\",\n        \"brand\": \"test\",\n        \"state\": \"available\",\n        \"creationTime\": \"2025-02-01T21:25:06.778360756Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By State",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/devices/state/{{STATE}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices",
+								"state",
+								"{{STATE}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/state/{{STATE}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"state",
+										"{{STATE}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "4eec5b3f-3f6e-4d05-ae98-7c48ce585066"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 21:59:29 GMT"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"39735372-23aa-4e87-84c4-a41cbbd24b54\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:25:06.77836Z\"\n        },\n        {\n            \"id\": \"b7ed78da-8788-429c-8efc-72984983b134\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:30:09.616142Z\"\n        },\n        {\n            \"id\": \"6d62f94a-3bac-4d15-a702-0cb1848417e1\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:34:12.998198Z\"\n        },\n        {\n            \"id\": \"252df896-987e-4657-acb7-8b9cb9f57122\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:54.966977Z\"\n        },\n        {\n            \"id\": \"58be3dda-b416-406a-b7ea-0d7af74df769\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:57.075878Z\"\n        },\n        {\n            \"id\": \"79a3fddc-b91a-4838-8838-9c9a8be2b1e5\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:58.090372Z\"\n        },\n        {\n            \"id\": \"abcb8bdb-ad0d-4772-8657-80075806c515\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:52:58.980639Z\"\n        },\n        {\n            \"id\": \"7c596ede-0522-4463-8377-2697f5e59361\",\n            \"name\": \"Example\",\n            \"brand\": \"brand a\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:00.196922Z\"\n        },\n        {\n            \"id\": \"605a2370-5f4a-4be6-9ac4-02e1f8aadb8f\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:03.849865Z\"\n        },\n        {\n            \"id\": \"067eea9a-735b-4f50-a5de-dd1646ed91a1\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:04.759059Z\"\n        },\n        {\n            \"id\": \"36791afb-1227-4108-a9db-3acd7e8ced9f\",\n            \"name\": \"Example\",\n            \"brand\": \"brand b\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:05.646927Z\"\n        },\n        {\n            \"id\": \"296cdf0a-3934-4422-88c2-ca66d848e8c0\",\n            \"name\": \"Example\",\n            \"brand\": \"brand c\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:07.541096Z\"\n        },\n        {\n            \"id\": \"2d48f52c-44e4-4ac9-89d4-c8fb8572a527\",\n            \"name\": \"Example\",\n            \"brand\": \"brand c\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:08.438382Z\"\n        },\n        {\n            \"id\": \"fa61097d-f9ae-4a43-8b87-1161cb0fb20d\",\n            \"name\": \"Example\",\n            \"brand\": \"brand e\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:53:12.159465Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Invalid State",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/state/{{STATE}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"state",
+										"{{STATE}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "e2becbe2-33f6-40cc-9617-13aed295fd1e"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 22:01:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "111"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"error\": \"invalid state, value must be one of the following: 'active', 'inactive' or 'in-use'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get By Brand",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/devices/brand/{{BRAND}}",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"devices",
+								"brand",
+								"{{BRAND}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SERVER}}/devices/brand/{{BRAND}}",
+									"host": [
+										"{{SERVER}}"
+									],
+									"path": [
+										"devices",
+										"brand",
+										"{{BRAND}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "ba356bce-4bdc-4076-b2fd-431bfbdc3d91"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 01 Feb 2025 22:00:15 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "444"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"39735372-23aa-4e87-84c4-a41cbbd24b54\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:25:06.77836Z\"\n        },\n        {\n            \"id\": \"b7ed78da-8788-429c-8efc-72984983b134\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:30:09.616142Z\"\n        },\n        {\n            \"id\": \"6d62f94a-3bac-4d15-a702-0cb1848417e1\",\n            \"name\": \"test\",\n            \"brand\": \"test\",\n            \"state\": \"available\",\n            \"creationTime\": \"2025-02-01T21:34:12.998198Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER}}/health-check",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"health-check"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "healthy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}/health-check",
+							"host": [
+								"{{SERVER}}"
+							],
+							"path": [
+								"health-check"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 01 Feb 2025 21:41:37 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "OK"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "DEVICE_ID",
+			"value": "92cb0319-fdb7-4ab8-b8cb-780e93f2c962",
+			"type": "string"
+		},
+		{
+			"key": "STATE",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BRAND",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

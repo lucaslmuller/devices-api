@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "main",
+        "type": "go",
+        "request": "launch",
+        "program": "main.go",
+        "env": {
+          "POSTGRES_HOST": "localhost",
+          "POSTGRES_PORT": "5432",
+          "POSTGRES_USER": "admin",
+          "POSTGRES_PASSWORD": "pwd",
+          "POSTGRES_DB": "technical_test",
+          "REDIS_HOST": "localhost",
+          "REDIS_PORT": "6379"
+        }
+      }
+    ]
+  }
