@@ -5,21 +5,10 @@ import (
 	"errors"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/domain/model"
-	"github.com/lucaslmuller/technical-test/internal/app/device/repository"
-	"github.com/lucaslmuller/technical-test/internal/infrastructure/adapter/redis/cache"
 )
 
-type update struct {
-	repository *repository.Device
-	redis      *cache.Redis
-}
-
-func NewUpdate(r *repository.Device, redis *cache.Redis) update {
-	return update{r, redis}
-}
-
-func (s update) Device(ctx context.Context, device *model.Device) (updatedDevice *model.Device, err error) {
-	currentDevice, err := s.repository.Database.Get.ByID(ctx, *device.Id)
+func (s *DeviceService) Update(ctx context.Context, device *model.Device) (updatedDevice *model.Device, err error) {
+	currentDevice, err := s.repository.GetByID(ctx, *device.Id)
 
 	if err != nil {
 		return nil, err
@@ -41,7 +30,7 @@ func (s update) Device(ctx context.Context, device *model.Device) (updatedDevice
 		}
 	}
 
-	err = s.repository.Database.Update.Device(ctx, device)
+	err = s.repository.Update(ctx, device)
 	updatedDevice = device
 
 	s.redis.Delete(ctx, currentDevice.CacheKey().GetByBrand())

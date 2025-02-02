@@ -7,7 +7,7 @@ import (
 	"github.com/lucaslmuller/technical-test/internal/utils"
 )
 
-func (api api) Create(w http.ResponseWriter, r *http.Request) {
+func (api *api) Create(w http.ResponseWriter, r *http.Request) {
 	ctx, input, _, err := utils.ParseRequest[dto.CreateDeviceInput](r, []string{})
 
 	if err != nil {
@@ -15,7 +15,7 @@ func (api api) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, validationErr, err := api.Endpoints.Create.Device(*ctx, input)
+	output, validationErr, err := api.Endpoints.Create(*ctx, input)
 
 	if validationErr != nil {
 		utils.RespondWithError(ctx, w, http.StatusBadRequest, validationErr.Error())

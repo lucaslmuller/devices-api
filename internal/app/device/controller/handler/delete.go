@@ -7,7 +7,7 @@ import (
 	"github.com/lucaslmuller/technical-test/internal/utils"
 )
 
-func (api api) Delete(w http.ResponseWriter, r *http.Request) {
+func (api *api) Delete(w http.ResponseWriter, r *http.Request) {
 	ctx, input, params, err := utils.ParseRequest[dto.DeleteDeviceInput](r, []string{"id"})
 
 	input.ID = params["id"]
@@ -18,7 +18,7 @@ func (api api) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validationErr, err := api.Endpoints.Delete.Device(*ctx, input)
+	validationErr, err := api.Endpoints.Delete(*ctx, input)
 
 	if validationErr != nil {
 		utils.RespondWithError(ctx, w, http.StatusBadRequest, validationErr.Error())

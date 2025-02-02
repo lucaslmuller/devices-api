@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/lucaslmuller/technical-test/bootstrap/cmd"
+	"github.com/lucaslmuller/technical-test/cmd"
 )
 
 func main() {

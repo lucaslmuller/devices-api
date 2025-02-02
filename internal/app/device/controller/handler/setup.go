@@ -1,22 +1,17 @@
 package handler
 
 import (
-	"github.com/lucaslmuller/technical-test/internal/app/device/controller"
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/endpoint"
-	"github.com/lucaslmuller/technical-test/internal/app/device/domain"
+	"github.com/lucaslmuller/technical-test/internal/app/device/domain/service"
 )
 
 type api struct {
-	Endpoints *controller.DeviceEndpoints
+	Endpoints *endpoint.DeviceEndpoints
 }
 
-func SetupAPI(services *domain.DeviceServices) *api {
+func SetupAPI(s *service.DeviceService) *api {
+	endpoints := endpoint.NewDeviceEndpoints(s)
 	return &api{
-		Endpoints: &controller.DeviceEndpoints{
-			Get:    endpoint.NewGetEndpoints(services),
-			Create: endpoint.NewCreationEndpoints(services),
-			Update: endpoint.NewUpdateEndpoints(services),
-			Delete: endpoint.NewDeletionEndpoints(services),
-		},
+		Endpoints: endpoints,
 	}
 }

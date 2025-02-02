@@ -4,20 +4,10 @@ import (
 	"context"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/domain/model"
-	"github.com/lucaslmuller/technical-test/internal/app/device/repository"
 	"github.com/lucaslmuller/technical-test/internal/infrastructure/adapter/redis/cache"
 )
 
-type get struct {
-	repository *repository.Device
-	redis      *cache.Redis
-}
-
-func NewGet(r *repository.Device, redis *cache.Redis) get {
-	return get{r, redis}
-}
-
-func (s get) ByID(ctx context.Context, ID string) (device *model.Device, err error) {
+func (s *DeviceService) GetByID(ctx context.Context, ID string) (device *model.Device, err error) {
 	dummy := model.Device{
 		Id: &ID,
 	}
@@ -28,7 +18,7 @@ func (s get) ByID(ctx context.Context, ID string) (device *model.Device, err err
 		return
 	}
 
-	device, err = s.repository.Database.Get.ByID(ctx, ID)
+	device, err = s.repository.GetByID(ctx, ID)
 
 	if device != nil {
 		s.redis.Set(ctx, device.CacheKey().GetByID(), device)
@@ -37,7 +27,7 @@ func (s get) ByID(ctx context.Context, ID string) (device *model.Device, err err
 	return
 }
 
-func (s get) ByBrand(ctx context.Context, brandID string) (devices []model.Device, err error) {
+func (s *DeviceService) GetByBrand(ctx context.Context, brandID string) (devices []model.Device, err error) {
 	dummy := model.Device{
 		Brand: brandID,
 	}
@@ -49,14 +39,14 @@ func (s get) ByBrand(ctx context.Context, brandID string) (devices []model.Devic
 		return
 	}
 
-	devices, err = s.repository.Database.Get.ByBrand(ctx, brandID)
+	devices, err = s.repository.GetByBrand(ctx, brandID)
 
 	s.redis.Set(ctx, dummy.CacheKey().GetByBrand(), devices)
 
 	return
 }
 
-func (s get) ByState(ctx context.Context, state string) (devices []model.Device, err error) {
+func (s *DeviceService) GetByState(ctx context.Context, state string) (devices []model.Device, err error) {
 	dummy := model.Device{
 		State: state,
 	}
@@ -68,14 +58,14 @@ func (s get) ByState(ctx context.Context, state string) (devices []model.Device,
 		return
 	}
 
-	devices, err = s.repository.Database.Get.ByState(ctx, state)
+	devices, err = s.repository.GetByState(ctx, state)
 
 	s.redis.Set(ctx, dummy.CacheKey().GetByState(), devices)
 
 	return
 }
 
-func (s get) All(ctx context.Context) (devices []model.Device, err error) {
+func (s *DeviceService) GetAll(ctx context.Context) (devices []model.Device, err error) {
 	dummy := model.Device{}
 	cached, err := cache.Get[[]model.Device](ctx, dummy.CacheKey().GetAll(), s.redis)
 
@@ -84,7 +74,7 @@ func (s get) All(ctx context.Context) (devices []model.Device, err error) {
 		return
 	}
 
-	devices, err = s.repository.Database.Get.All(ctx)
+	devices, err = s.repository.GetAll(ctx)
 
 	s.redis.Set(ctx, dummy.CacheKey().GetAll(), devices)
 

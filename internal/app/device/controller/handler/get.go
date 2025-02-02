@@ -14,7 +14,7 @@ func (api api) GetAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, err := api.Endpoints.Get.All(*ctx)
+	output, err := api.Endpoints.GetAll(*ctx)
 	if err != nil {
 		utils.RespondWithError(ctx, w, http.StatusInternalServerError, err.Error())
 		return
@@ -31,7 +31,7 @@ func (api api) GetByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, validationErr, err := api.Endpoints.Get.ByID(*ctx, input)
+	output, validationErr, err := api.Endpoints.GetByID(*ctx, input)
 
 	if validationErr != nil {
 		utils.RespondWithError(ctx, w, http.StatusBadRequest, validationErr.Error())
@@ -60,7 +60,7 @@ func (api api) GetByBrand(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, validationErr, err := api.Endpoints.Get.ByBrand(*ctx, input)
+	output, validationErr, err := api.Endpoints.GetByBrand(*ctx, input)
 
 	if validationErr != nil {
 		utils.RespondWithError(ctx, w, http.StatusBadRequest, validationErr.Error())
@@ -83,7 +83,7 @@ func (api api) GetByState(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, validationErr, err := api.Endpoints.Get.ByState(*ctx, input)
+	output, validationErr, err := api.Endpoints.GetByState(*ctx, input)
 
 	if validationErr != nil {
 		utils.RespondWithError(ctx, w, http.StatusBadRequest, validationErr.Error())

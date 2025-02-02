@@ -2,21 +2,18 @@ package repository
 
 import (
 	"github.com/lucaslmuller/technical-test/internal/app/device/domain/model"
-	"github.com/lucaslmuller/technical-test/internal/app/device/repository/database"
 	"github.com/lucaslmuller/technical-test/internal/infrastructure"
+	"github.com/uptrace/bun"
 )
 
-func Setup(res *infrastructure.Resources) *Device {
+type DeviceRepository struct {
+	db *bun.DB
+}
+
+func NewRepository(res *infrastructure.Resources) *DeviceRepository {
 	CreateTable(res)
 
-	return &Device{
-		Database: DatabaseRepository{
-			Get:    database.NewGetRepository(res.PostgreSQL),
-			Create: database.NewCreateRepository(res.PostgreSQL),
-			Update: database.NewUpdateRepository(res.PostgreSQL),
-			Delete: database.NewDeleteRepository(res.PostgreSQL),
-		},
-	}
+	return &DeviceRepository{db: res.PostgreSQL}
 }
 
 func CreateTable(res *infrastructure.Resources) {
