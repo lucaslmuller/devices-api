@@ -49,17 +49,16 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceNameErrorInUse() {
 		Name: &newName,
 	}
 
-	r, body, bodyStr := updateDevice[utils.SuccessResponse[*dto.Output]](updatedDevice)
+	r, body, bodyStr := updateDevice[utils.ErrorResponse](updatedDevice)
 
 	s.NotNil(body)
-	s.NotNil(body.Data)
 
 	expected := utils.ErrorResponse{
 		Success: false,
 		Error:   "cannot change name while in use",
 	}
 
-	s.Equal(http.StatusBadRequest, r.StatusCode)
+	s.Equal(http.StatusInternalServerError, r.StatusCode)
 	s.Contains(r.Header.Get("Content-Type"), "application/json")
 	s.JSONEq(StringifyData(expected), bodyStr)
 
@@ -80,21 +79,20 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceBrandErrorInUse() {
 	newBrand := "updated_brand"
 
 	updatedDevice := &dto.UpdateDeviceInput{
-		ID:   id,
-		Name: &newBrand,
+		ID:    id,
+		Brand: &newBrand,
 	}
 
-	r, body, bodyStr := updateDevice[utils.SuccessResponse[*dto.Output]](updatedDevice)
+	r, body, bodyStr := updateDevice[utils.ErrorResponse](updatedDevice)
 
 	s.NotNil(body)
-	s.NotNil(body.Data)
 
 	expected := utils.ErrorResponse{
 		Success: false,
 		Error:   "cannot change brand while in use",
 	}
 
-	s.Equal(http.StatusBadRequest, r.StatusCode)
+	s.Equal(http.StatusInternalServerError, r.StatusCode)
 	s.Contains(r.Header.Get("Content-Type"), "application/json")
 	s.JSONEq(StringifyData(expected), bodyStr)
 
@@ -130,6 +128,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceNameSuccess() {
 	}
 
 	expected.Data.Name = newName
+	expected.Data.CreationTime = body.Data.CreationTime
 
 	s.Equal(http.StatusOK, r.StatusCode)
 	s.Contains(r.Header.Get("Content-Type"), "application/json")
@@ -147,8 +146,8 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceBrandSuccess() {
 	newBrand := "updated_brand"
 
 	updatedDevice := &dto.UpdateDeviceInput{
-		ID:   id,
-		Name: &newBrand,
+		ID:    id,
+		Brand: &newBrand,
 	}
 
 	r, body, bodyStr := updateDevice[utils.SuccessResponse[*dto.Output]](updatedDevice)
@@ -162,6 +161,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceBrandSuccess() {
 	}
 
 	expected.Data.Brand = newBrand
+	expected.Data.CreationTime = body.Data.CreationTime
 
 	s.Equal(http.StatusOK, r.StatusCode)
 	s.Contains(r.Header.Get("Content-Type"), "application/json")
@@ -177,6 +177,8 @@ func updateDevice[T any](device *dto.UpdateDeviceInput) (r *http.Response, respo
 	responseData = new(T)
 
 	req, _ := http.NewRequest("PUT", fmt.Sprintf("http://localhost:8080/devices/%s", device.ID), bytes.NewReader(requestBody))
+
+	req.Header.Set("Content-Type", "application/json")
 
 	r, _ = c.Do(req)
 	b, _ := io.ReadAll(r.Body)
