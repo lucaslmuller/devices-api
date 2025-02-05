@@ -6,22 +6,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type DeleteDeviceSuite struct {
-	suite.Suite
-}
-
-func TestDeleteDevice(t *testing.T) {
-	suite.Run(t, new(DeleteDeviceSuite))
-}
-
-func (s *DeleteDeviceSuite) TestDeleteDeviceInvalidUUID() {
+func (s *e2eSuite) TestDeleteDeviceInvalidUUID() {
 	id := "invalid"
 	r, _, bodyStr := DeleteDevice[utils.ErrorResponse](id)
 
@@ -34,7 +24,7 @@ func (s *DeleteDeviceSuite) TestDeleteDeviceInvalidUUID() {
 	s.JSONEq(StringifyData(expected), bodyStr)
 }
 
-func (s *DeleteDeviceSuite) TestDeleteDeviceErrorInUse() {
+func (s *e2eSuite) TestDeleteDeviceErrorInUse() {
 	device := MockDevice("in-use")
 	id := device.Id
 
@@ -62,7 +52,7 @@ func (s *DeleteDeviceSuite) TestDeleteDeviceErrorInUse() {
 	DeleteDevice[any](id)
 }
 
-func (s *DeleteDeviceSuite) TestDeleteDeviceSuccess() {
+func (s *e2eSuite) TestDeleteDeviceSuccess() {
 	device := MockDevice("available")
 	id := device.Id
 

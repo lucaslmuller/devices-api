@@ -6,7 +6,7 @@ import (
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 )
 
-func (e DeviceEndpoints) Delete(ctx context.Context, input *dto.DeleteDeviceInput) (validationErr error, internalErr error) {
+func (e *DeviceEndpoints) Delete(ctx context.Context, input *dto.DeleteDeviceInput) (validationErr error, internalErr error) {
 	if validationErr = input.Validate(); validationErr != nil {
 		return
 	}

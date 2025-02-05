@@ -50,7 +50,7 @@ func (c *CacheKey) ToString() string {
 	return strings.Join(keyArr, "#")
 }
 
-func Get[model any](ctx context.Context, key string, c *Redis) (*model, error) {
+func Get[model any](ctx context.Context, key string, c Cache) (*model, error) {
 	datab, err := c.GetInBytes(ctx, key)
 	if err != nil || datab == nil {
 		return nil, err

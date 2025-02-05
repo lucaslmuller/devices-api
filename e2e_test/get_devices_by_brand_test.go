@@ -5,22 +5,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type GetDevicesByBrandSuite struct {
-	suite.Suite
-}
-
-func TestGetDevicesByBrand(t *testing.T) {
-	suite.Run(t, new(GetDevicesByBrandSuite))
-}
-
-func (s *GetDevicesByBrandSuite) TestGetDevicesByBrandSuccess() {
+func (s *e2eSuite) TestGetDevicesByBrandSuccess() {
 	devicesList := CreateMockDevices()
 
 	r, data, _ := getByBrand[utils.SuccessResponse[[]dto.Output]]()

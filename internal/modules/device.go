@@ -18,7 +18,7 @@ func setupDeviceModule(res *infrastructure.Resources) *deviceModule {
 	repository := repository.NewRepository(res)
 
 	// * Setup services
-	s := service.NewService(repository, res.Redis)
+	s := service.NewService(repository, res.Redis, res.Logger)
 
 	// * Setup API (handler and usecases)
 	api := handler.SetupAPI(s)

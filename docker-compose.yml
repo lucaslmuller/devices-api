@@ -39,12 +39,6 @@ services:
       - POSTGRES_PASSWORD=pwd
     networks:
       - technical_test
-    # healthcheck:
-    #   test: ["CMD", "pg_isready", "-U", "postgres", "-d", "technical-test"]
-    #   interval: 10s
-    #   retries: 5
-    #   start_period: 30s
-    #   timeout: 10s
 
   redis:
     image: redis:latest
@@ -54,7 +48,3 @@ services:
       - redis_data:/data
     networks:
       - technical_test
-    # healthcheck:
-    #   test: ["CMD", "redis-cli", "ping"]
-    #   interval: 10s
-    #   retries: 3

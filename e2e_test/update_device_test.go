@@ -6,22 +6,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type UpdateDeviceSuite struct {
-	suite.Suite
-}
-
-func TestUpdateDevice(t *testing.T) {
-	suite.Run(t, new(UpdateDeviceSuite))
-}
-
-func (s *UpdateDeviceSuite) TestUpdateDeviceInvalidUUID() {
+func (s *e2eSuite) TestUpdateDeviceInvalidUUID() {
 	updatedDevice := &dto.UpdateDeviceInput{
 		ID: "invalid",
 	}
@@ -37,7 +27,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceInvalidUUID() {
 	s.JSONEq(StringifyData(expected), bodyStr)
 }
 
-func (s *UpdateDeviceSuite) TestUpdateDeviceNameErrorInUse() {
+func (s *e2eSuite) TestUpdateDeviceNameErrorInUse() {
 	device := MockDevice("in-use")
 
 	id := device.Id
@@ -71,7 +61,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceNameErrorInUse() {
 	DeleteDevice[any](id)
 }
 
-func (s *UpdateDeviceSuite) TestUpdateDeviceBrandErrorInUse() {
+func (s *e2eSuite) TestUpdateDeviceBrandErrorInUse() {
 	device := MockDevice("in-use")
 
 	id := device.Id
@@ -105,7 +95,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceBrandErrorInUse() {
 	DeleteDevice[any](id)
 }
 
-func (s *UpdateDeviceSuite) TestUpdateDeviceNameSuccess() {
+func (s *e2eSuite) TestUpdateDeviceNameSuccess() {
 	device := MockDevice("inactive")
 
 	id := device.Id
@@ -138,7 +128,7 @@ func (s *UpdateDeviceSuite) TestUpdateDeviceNameSuccess() {
 	DeleteDevice[any](id)
 }
 
-func (s *UpdateDeviceSuite) TestUpdateDeviceBrandSuccess() {
+func (s *e2eSuite) TestUpdateDeviceBrandSuccess() {
 	device := MockDevice("inactive")
 
 	id := device.Id

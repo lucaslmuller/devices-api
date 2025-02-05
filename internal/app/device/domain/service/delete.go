@@ -22,13 +22,34 @@ func (s *DeviceService) Delete(ctx context.Context, ID string) (err error) {
 		return errors.New("cannot delete device in use")
 	}
 
-	err = s.repository.Delete(ctx, ID)
+	if err = s.repository.Delete(ctx, ID); err != nil {
+		return err
+	}
 
-	m := model.Device{Id: &ID}
-	s.redis.Delete(ctx, m.CacheKey().GetAll())
-	s.redis.Delete(ctx, m.CacheKey().GetByID())
-	s.redis.Delete(ctx, m.CacheKey().GetByBrand())
-	s.redis.Delete(ctx, m.CacheKey().GetByState())
+	m := &model.Device{Id: &ID}
+	if err = s.handleDeleteCache(ctx, m); err != nil {
+		s.logger.Error(err)
+	}
 
 	return
+}
+
+func (s *DeviceService) handleDeleteCache(ctx context.Context, m *model.Device) (err error) {
+	if err = s.redis.Delete(ctx, m.CacheKey().GetAll()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, m.CacheKey().GetByID()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, m.CacheKey().GetByBrand()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, m.CacheKey().GetByState()); err != nil {
+		return err
+	}
+
+	return nil
 }

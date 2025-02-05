@@ -1,4 +1,4 @@
-package cmd
+package tools
 
 import (
 	"github.com/lucaslmuller/technical-test/internal/infrastructure"
@@ -6,7 +6,7 @@ import (
 	"github.com/lucaslmuller/technical-test/internal/infrastructure/adapter/redis"
 )
 
-func connectTools(res *infrastructure.Resources) {
+func ConnectTools(res *infrastructure.Resources) {
 	postgresql.Connect(res)
 	redis.ConnectRedis(res)
 }

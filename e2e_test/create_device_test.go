@@ -5,22 +5,12 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type CreateDeviceSuite struct {
-	suite.Suite
-}
-
-func TestCreateDevice(t *testing.T) {
-	suite.Run(t, new(CreateDeviceSuite))
-}
-
-func (s *CreateDeviceSuite) TestCreateDeviceInvalidState() {
+func (s *e2eSuite) TestCreateDeviceInvalidState() {
 	device := &dto.CreateDeviceInput{
 		Name:  "test",
 		Brand: "test",
@@ -38,7 +28,7 @@ func (s *CreateDeviceSuite) TestCreateDeviceInvalidState() {
 	s.JSONEq(StringifyData(expected), bodyStr)
 }
 
-func (s *CreateDeviceSuite) TestCreateDeviceSuccess() {
+func (s *e2eSuite) TestCreateDeviceSuccess() {
 	device := &dto.CreateDeviceInput{
 		Name:  "test",
 		Brand: "test",

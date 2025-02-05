@@ -8,7 +8,7 @@ RUN chmod +x bin/entrypoint.sh
 RUN apt update -yq
 RUN apt install -y postgresql-client
 
-RUN cd /service && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /http-service .
+RUN cd /service && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /http-service ./cmd/api
 
 # TEST
 FROM build as test

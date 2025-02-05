@@ -4,22 +4,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type GetSingleDevice struct {
-	suite.Suite
-}
-
-func TestGetSingleDevice(t *testing.T) {
-	suite.Run(t, new(GetSingleDevice))
-}
-
-func (s *GetSingleDevice) TestGetSingleDeviceInvalidUUID() {
+func (s *e2eSuite) TestGetSingleDeviceInvalidUUID() {
 	r, body := getDevice("1234")
 
 	expected := utils.ErrorResponse{
@@ -31,7 +21,7 @@ func (s *GetSingleDevice) TestGetSingleDeviceInvalidUUID() {
 	s.JSONEq(StringifyData(expected), body)
 }
 
-func (s *GetSingleDevice) TestGetSingleDeviceNotFound() {
+func (s *e2eSuite) TestGetSingleDeviceNotFound() {
 	r, body := getDevice("0d3ec017-290e-4f6e-b2f6-a97209aa4abb")
 
 	expected := utils.ErrorResponse{
@@ -44,7 +34,7 @@ func (s *GetSingleDevice) TestGetSingleDeviceNotFound() {
 	s.JSONEq(StringifyData(expected), body)
 }
 
-func (s *GetSingleDevice) TestGetSingleDeviceSuccess() {
+func (s *e2eSuite) TestGetSingleDeviceSuccess() {
 	_, device, _ := CreateDevice[utils.SuccessResponse[*dto.Output]](&dto.CreateDeviceInput{
 		Name:  "test",
 		Brand: "test",

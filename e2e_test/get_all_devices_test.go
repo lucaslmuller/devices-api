@@ -4,22 +4,12 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type GetAllDevicesSuite struct {
-	suite.Suite
-}
-
-func TestGetAllDevices(t *testing.T) {
-	suite.Run(t, new(GetAllDevicesSuite))
-}
-
-func (s *GetAllDevicesSuite) TestGetAllDevicesSuccess() {
+func (s *e2eSuite) TestGetAllDevicesSuccess() {
 	devicesList := CreateMockDevices()
 
 	r, data, _ := getAll[utils.SuccessResponse[[]dto.Output]]()

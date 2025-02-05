@@ -1,18 +1,22 @@
-package cmd
+package main
 
 import (
 	"context"
 
+	"github.com/lucaslmuller/technical-test/config"
 	"github.com/lucaslmuller/technical-test/internal/infrastructure"
 	"github.com/lucaslmuller/technical-test/internal/infrastructure/http"
 	"github.com/lucaslmuller/technical-test/internal/infrastructure/shutdown"
 	"github.com/lucaslmuller/technical-test/internal/modules"
+	"github.com/lucaslmuller/technical-test/tools"
 )
 
-func Run(ctx context.Context, config *infrastructure.Configuration) {
+func main() {
+	ctx := context.Background()
+	config := config.SetupConfig()
 	resources := infrastructure.NewResources(ctx, config)
 
-	connectTools(resources)
+	tools.ConnectTools(resources)
 	http.NewRouter(resources)
 	modules.SetupModules(resources)
 

@@ -5,22 +5,12 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"testing"
 
 	"github.com/lucaslmuller/technical-test/internal/app/device/controller/dto"
 	"github.com/lucaslmuller/technical-test/internal/utils"
-	"github.com/stretchr/testify/suite"
 )
 
-type GetDevicesByStateSuite struct {
-	suite.Suite
-}
-
-func TestGetDevicesByState(t *testing.T) {
-	suite.Run(t, new(GetDevicesByStateSuite))
-}
-
-func (s *GetDevicesByStateSuite) TestGetDevicesByStateSuccess() {
+func (s *e2eSuite) TestGetDevicesByStateSuccess() {
 	devicesList := CreateMockDevices()
 
 	r, data, _ := getByState[utils.SuccessResponse[[]dto.Output]]()

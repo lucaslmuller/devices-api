@@ -30,17 +30,47 @@ func (s *DeviceService) Update(ctx context.Context, device *model.Device) (updat
 		}
 	}
 
-	err = s.repository.Update(ctx, device)
+	if err = s.repository.Update(ctx, device); err != nil {
+		return nil, err
+	}
+
 	updatedDevice = device
 
-	s.redis.Delete(ctx, currentDevice.CacheKey().GetByBrand())
-	s.redis.Delete(ctx, currentDevice.CacheKey().GetByState())
-	s.redis.Delete(ctx, device.CacheKey().GetByBrand())
-	s.redis.Delete(ctx, device.CacheKey().GetAll())
-	s.redis.Delete(ctx, device.CacheKey().GetByState())
-	s.redis.Delete(ctx, device.CacheKey().GetByID())
+	if err = s.handleUpdateCache(ctx, currentDevice, updatedDevice); err != nil {
+		s.logger.Error(err)
+	}
 
-	s.redis.Set(ctx, updatedDevice.CacheKey().GetByID(), updatedDevice)
+	return updatedDevice, nil
+}
 
-	return
+func (s *DeviceService) handleUpdateCache(ctx context.Context, currentDevice *model.Device, updatedDevice *model.Device) (err error) {
+	if err = s.redis.Delete(ctx, currentDevice.CacheKey().GetByBrand()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, currentDevice.CacheKey().GetByState()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, updatedDevice.CacheKey().GetByBrand()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, updatedDevice.CacheKey().GetAll()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, updatedDevice.CacheKey().GetByState()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Delete(ctx, updatedDevice.CacheKey().GetByID()); err != nil {
+		return err
+	}
+
+	if err = s.redis.Set(ctx, updatedDevice.CacheKey().GetByID(), updatedDevice); err != nil {
+		return err
+	}
+
+	return nil
 }
